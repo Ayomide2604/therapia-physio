@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
 	return (
 		<footer className="main-footer pb-3">
@@ -8,14 +8,27 @@ const Footer = () => {
 					<div className="col-lg-3">
 						{/* About Footer Start */}
 						<div className="about-footer">
-						
+							<Link to="/" className="navbar-brand">
+								<img
+									src="/logo-dark.png"
+									alt="Logo"
+									className="img-fluid"
+									style={{
+										width: 200,
+										height: 200,
+										marginTop: "-70px",
+										marginBottom: "-40px",
+									}}
+								/>
+							</Link>
 							{/* Footer Logo End */}
 							{/* About Footer Content Start */}
 							<div className="about-footer-content">
 								<p>
-								Therapia Rehab brings professional physiotherapy services to your home in Lagos, Nigeria.
-								Experience quality rehabilitation and wellness care in your comfort zone.
-							</p>
+									Therapia Rehab brings professional physiotherapy services to
+									your home in Lagos, Nigeria. Experience quality rehabilitation
+									and wellness care in your comfort zone.
+								</p>
 							</div>
 							{/* Footer Social Links Start */}
 							<div className="footer-social-links">

@@ -1,6 +1,9 @@
 import React from "react";
 
 const AppointmentForm = () => {
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
 	return (
 		<div className="page-book-appointment">
 			<div className="container">
@@ -64,13 +67,7 @@ const AppointmentForm = () => {
 								style={{ visibility: "visible", animationName: "fadeInUp" }}
 							>
 								{/* Form Start */}
-								<form
-									id="appointmentForm"
-									action="#"
-									method="POST"
-									data-toggle="validator"
-									noValidate="true"
-								>
+								<form id="appointmentForm" onSubmit={handleSubmit}>
 									<div className="row">
 										<div className="form-group col-md-6 mb-4">
 											<input
@@ -128,7 +125,7 @@ const AppointmentForm = () => {
 											<div className="help-block with-errors" />
 										</div>
 										<div className="col-md-12 form-group">
-											<button type="submit" className="btn-default disabled">
+											<button type="submit" className="btn-default">
 												book appointment
 											</button>
 											<div id="msgSubmit" className="h3 hidden" />

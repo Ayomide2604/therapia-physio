@@ -6,11 +6,11 @@ const PhysioInfo = () => {
 			<div className="doctor-info-item">
 				<div className="image-box">
 					<figure className="image-anime">
-						{/* <img src="images/about-doctor-img.jpg" alt="" /> */}
+						<img src="/physio-info.jpg" alt="" className="img-fluid" style={{padding:"3px"}} />
 					</figure>
 				</div>
 				<div className="doctor-info-content">
-					<h3>PT. Akinloye Femi</h3>
+					<h3>PT. Akinloye Gabriel Oluwafemi</h3>
 					<p>Physiotherapy</p>
 				</div>
 			</div>

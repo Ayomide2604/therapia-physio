@@ -208,13 +208,6 @@ const WhyUs = () => {
 							</div>
 							{/* Why Choose Box End */}
 						</div>
-						<div className="col-lg-12">
-							{/* Why Choose Image Start */}
-							<div className="why-choose-image">
-								{/* <img src="images/why-us-img.png" alt="" /> */}
-							</div>
-							{/* Why Choose Image End */}
-						</div>
 					</div>
 				</div>
 				{/* Why Choose Us Box End */}

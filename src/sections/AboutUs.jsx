@@ -1,5 +1,6 @@
 import React from "react";
 import PhysioInfo from "../components/PhysioInfo";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
 	return (
@@ -19,7 +20,7 @@ const AboutUs = () => {
 									}}
 								>
 									<img
-										src="images/about-img.jpg"
+										src="/about.jpg"
 										alt=""
 										style={{ transform: "translate(0px, 0px)" }}
 									/>
@@ -49,13 +50,23 @@ const AboutUs = () => {
 							<div className="section-title">
 								<h3 className="wow fadeInUp">about us</h3>
 								<h2 className="text-anime-style-2" data-cursor="-opaque">
-									Therapia Rehab - Lagos' Premier <span>Home Physiotherapy</span> Service
+									Therapia Rehab - Lagos' Premier{" "}
+									<span>Home Physiotherapy</span> Service
 								</h2>
 								<p className="wow fadeInUp" data-wow-delay="0.25s">
-									At Therapia Rehab, we bring professional physiotherapy services directly to your home in Lagos, Nigeria.
-									Our team of certified physiotherapists provides personalized treatment plans, rehabilitation programs,
-									and wellness services in the comfort and convenience of your own space. We understand that mobility
-									challenges shouldn't prevent you from receiving quality healthcare.
+									At Therapia Rehab, we bring professional physiotherapy
+									services directly to your home in Lagos, Nigeria. Our team of
+									certified physiotherapists specializes in sports
+									physiotherapy, exercise training, neuromuscular
+									rehabilitation, and comprehensive wellness programs designed
+									to restore function and improve quality of life.
+								</p>
+								<p className="wow fadeInUp" data-wow-delay="0.35s">
+									We understand that mobility challenges, injuries, or chronic
+									conditions shouldn't prevent you from receiving quality
+									healthcare. That's why we bring our expertise to the comfort
+									and convenience of your own space, providing personalized
+									treatment plans tailored to your specific needs and goals.
 								</p>
 							</div>
 							{/* Section Title End */}
@@ -70,7 +81,7 @@ const AboutUs = () => {
 										<img src="/images/icon-about-us-1.svg" alt="" />
 									</div>
 									<div className="about-list-content">
-										<h3>personalized treatment plans</h3>
+										<h3>Sports Physiotherapy</h3>
 									</div>
 								</div>
 								{/* About List Item End */}
@@ -83,7 +94,7 @@ const AboutUs = () => {
 										<img src="/images/icon-about-us-2.svg" alt="" />
 									</div>
 									<div className="about-list-content">
-										<h3>home-based therapy</h3>
+										<h3>Exercise Training</h3>
 									</div>
 								</div>
 								{/* About List Item End */}
@@ -96,7 +107,7 @@ const AboutUs = () => {
 										<img src="/images/icon-about-us-3.svg" alt="" />
 									</div>
 									<div className="about-list-content">
-										<h3>rehabilitation programs</h3>
+										<h3>Neuromuscular Rehabilitation</h3>
 									</div>
 								</div>
 								{/* About List Item End */}
@@ -109,7 +120,7 @@ const AboutUs = () => {
 										<img src="/images/icon-about-us-4.svg" alt="" />
 									</div>
 									<div className="about-list-content">
-										<h3>ongoing support &amp; care</h3>
+										<h3>Home-Based Therapy</h3>
 									</div>
 								</div>
 								{/* About List Item End */}
@@ -125,9 +136,9 @@ const AboutUs = () => {
 									className="appointment-btn wow fadeInUp"
 									data-wow-delay="1s"
 								>
-									<a href="#" className="btn-default">
+									<Link to="/appointment" className="btn-default">
 										Make an appointment
-									</a>
+									</Link>
 								</div>
 								{/* Appointment Button End */}
 							</div>

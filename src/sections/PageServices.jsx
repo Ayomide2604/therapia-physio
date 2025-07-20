@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PageServices = () => {
 	return (
@@ -25,13 +26,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -60,13 +54,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -95,13 +82,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -130,13 +110,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -165,13 +138,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -200,13 +166,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -235,13 +194,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -270,13 +222,6 @@ const PageServices = () => {
 								</p>
 							</div>
 							{/* Service Body End */}
-							{/* Service Footer Start */}
-							<div className="service-footer">
-								<a href="#" className="service-btn">
-									<img src="images/arrow-white.svg" alt="" />
-								</a>
-							</div>
-							{/* Service Footer End */}
 						</div>
 						{/* Service Item End */}
 					</div>
@@ -311,9 +256,9 @@ const PageServices = () => {
 						<div className="col-lg-6">
 							{/* Cta Appointment Button Start */}
 							<div className="cta-appointment-btn">
-								<a href="#" className="btn-default">
+								<Link to="/appointment" className="btn-default">
 									book appointment
-								</a>
+								</Link>
 							</div>
 							{/* Cta Appointment Button End */}
 						</div>

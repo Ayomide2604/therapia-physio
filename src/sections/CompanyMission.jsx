@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const CompanyMission = () => {
 	return (
 		<div className="mission-vision">
@@ -437,7 +437,7 @@ const CompanyMission = () => {
 							{/* Icon Box End */}
 							{/* Mva Content Start */}
 							<div className="mva-item-content">
-								<h3>our approch</h3>
+								<h3>our approach</h3>
 								<p>
 									We understand that injuries and acute pain can unexpectedly.
 									Our emergency that injuries and acute pain can unexpectedly.
@@ -480,9 +480,9 @@ const CompanyMission = () => {
 						<div className="col-lg-6">
 							{/* Cta Appointment Button Start */}
 							<div className="cta-appointment-btn">
-								<a href="/appointment" className="btn-default">
+								<Link to="/appointment" className="btn-default">
 									book appointment
-								</a>
+								</Link>
 							</div>
 							{/* Cta Appointment Button End */}
 						</div>

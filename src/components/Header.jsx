@@ -10,11 +10,14 @@ const Header = () => {
 						{/* Logo Start */}
 						<Link to="/" className="navbar-brand">
 							<img
-								src="images/logo.png"
+								src="/logo.png"
 								alt="Logo"
+								className=""
 								style={{
-									width: 70,
-									height: 50,
+									width: 200,
+									height: 200,
+									marginTop: "-70px",
+									marginBottom: "-70px",
 								}}
 							/>
 						</Link>
