@@ -51,9 +51,9 @@ const Header = () => {
 							</div>
 							{/* Let’s Start Button Start */}
 							<div className="header-btn d-inline-flex">
-								<Link to="#" className="btn-default">
-									+(123) 698-5245
-								</Link>
+								<a href="tel:+2349055772269" className="btn-default">
+									+(234) 905 577 2269
+								</a>
 							</div>
 							{/* Let’s Start Button End */}
 						</div>

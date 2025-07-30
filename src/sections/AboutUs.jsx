@@ -20,7 +20,7 @@ const AboutUs = () => {
 									}}
 								>
 									<img
-										src="/about.jpg"
+										src="/about_us.jpg"
 										alt=""
 										style={{ transform: "translate(0px, 0px)" }}
 									/>

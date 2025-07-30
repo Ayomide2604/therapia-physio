@@ -97,7 +97,15 @@ const Footer = () => {
 										<img src="images/icon-phone.svg" alt="" />
 									</div>
 									<div className="footer-info-box-content">
-										<p>(+234) 808 253 1771</p>
+										<a href="tel:+2349055772269" className="text-white">(+234) 905 577 2269</a>
+									</div>
+								</div>
+								<div className="footer-info-box">
+									<div className="icon-box">
+										<i className="bi bi-whatsapp text-white" />
+									</div>
+									<div className="footer-info-box-content">
+										<a href="https://wa.me/2348082531771" target="_blank" rel="noopener noreferrer" className="text-white">(+234) 808 253 1771</a>
 									</div>
 								</div>
 								{/* Footer Info Box End */}
@@ -107,7 +115,7 @@ const Footer = () => {
 										<img src="images/icon-mail.svg" alt="" />
 									</div>
 									<div className="footer-info-box-content">
-										<p>Therapiarehab@gmail.com</p>
+										<a href="mailto:Therapiarehab@gmail.com" className="text-white">Therapiarehab@gmail.com</a>
 									</div>
 								</div>
 								{/* Footer Info Box End */}

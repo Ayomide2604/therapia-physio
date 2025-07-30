@@ -8,7 +8,7 @@ const ScrollingTicker = () => {
 				<div className="scrolling-content">
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
-						Emergency No. : (+234) 808 253 1771
+						Emergency No. : (+234) 905 577 2269
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
@@ -16,7 +16,7 @@ const ScrollingTicker = () => {
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
-						Book Appointment: (+234) 808 253 1771
+						Book Appointment: (+234) 905 577 2269
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
@@ -26,7 +26,7 @@ const ScrollingTicker = () => {
 				<div className="scrolling-content">
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
-						Emergency No. : (+234) 808 253 1771
+						Emergency No. : (+234) 905 577 2269
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
@@ -34,7 +34,7 @@ const ScrollingTicker = () => {
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
-						Book Appointment: (+234) 808 253 1771
+						Book Appointment: (+234) 905 577 2269
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />

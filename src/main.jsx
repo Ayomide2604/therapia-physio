@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/css/custom.css";
 import "./assets/css/all.css";
 import "./assets/css/animate.css";
