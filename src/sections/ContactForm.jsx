@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ContactForm = () => {
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		phone: "",
+		subject: "",
+		message: "",
+	});
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log("Form submitted");
+	};
 	return (
 		<div className="contact-us-form">
 			<div className="container">
@@ -72,20 +83,7 @@ const ContactForm = () => {
 								</h2>
 							</div>
 							{/* Section Title End */}
-							<form
-								id="contactForm"
-								action="#"
-								method="POST"
-								data-toggle="validator"
-								className="wow fadeInUp"
-								data-wow-delay="0.25s"
-								noValidate="true"
-								style={{
-									visibility: "visible",
-									animationDelay: "0.25s",
-									animationName: "fadeInUp",
-								}}
-							>
+							<form id="contactForm" onSubmit={handleSubmit}>
 								<div className="row">
 									<div className="form-group col-md-6 mb-4">
 										<input
@@ -94,7 +92,11 @@ const ContactForm = () => {
 											className="form-control"
 											id="fullname"
 											placeholder="Enter Name"
-											required=""
+											required
+											onChange={(e) =>
+												setFormData({ ...formData, name: e.target.value })
+											}
+											value={formData.name}
 										/>
 										<div className="help-block with-errors" />
 									</div>
@@ -105,7 +107,11 @@ const ContactForm = () => {
 											className="form-control"
 											id="email"
 											placeholder="Enter Email"
-											required=""
+											required
+											onChange={(e) =>
+												setFormData({ ...formData, email: e.target.value })
+											}
+											value={formData.email}
 										/>
 										<div className="help-block with-errors" />
 									</div>
@@ -116,7 +122,11 @@ const ContactForm = () => {
 											className="form-control"
 											id="phone"
 											placeholder="Phone Number"
-											required=""
+											required
+											onChange={(e) =>
+												setFormData({ ...formData, phone: e.target.value })
+											}
+											value={formData.phone}
 										/>
 										<div className="help-block with-errors" />
 									</div>
@@ -127,7 +137,11 @@ const ContactForm = () => {
 											className="form-control"
 											id="subject"
 											placeholder="Subject"
-											required=""
+											required
+											onChange={(e) =>
+												setFormData({ ...formData, subject: e.target.value })
+											}
+											value={formData.subject}
 										/>
 										<div className="help-block with-errors" />
 									</div>
@@ -138,8 +152,11 @@ const ContactForm = () => {
 											id="msg"
 											rows={5}
 											placeholder="Your Message"
-											required=""
-											defaultValue={""}
+											required
+											onChange={(e) =>
+												setFormData({ ...formData, message: e.target.value })
+											}
+											value={formData.message}
 										/>
 										<div className="help-block with-errors" />
 									</div>

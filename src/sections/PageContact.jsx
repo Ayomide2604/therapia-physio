@@ -44,7 +44,7 @@ const PageContact = () => {
 							{/* Contact Info Content Start */}
 							<div className="contact-info-content">
 								<h3>email</h3>
-								<p>Therapiarehab@gmail.com</p>
+								<p>therapiarehabng@gmail.com</p>
 							</div>
 							{/* Contact Info Content End */}
 						</div>
@@ -69,7 +69,7 @@ const PageContact = () => {
 							{/* Contact Info Content Start */}
 							<div className="contact-info-content">
 								<h3>phone</h3>
-								<p>(+234) 808 253 1771</p>
+								<p>(+234) 905 577 2269</p>
 							</div>
 							{/* Contact Info Content End */}
 						</div>

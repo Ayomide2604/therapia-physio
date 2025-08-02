@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AppointmentForm = () => {
+	const [formData, setFormData] = useState({
+		first_name: "",
+		last_name: "",
+		email: "",
+		phone: "",
+		date: "",
+	});
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setFormData({
+			first_name: "",
+			last_name: "",
+			email: "",
+			phone: "",
+			date: "",
+		});
+		console.log("form submitted");
 	};
 	return (
 		<div className="page-book-appointment">
@@ -76,7 +91,14 @@ const AppointmentForm = () => {
 												className="form-control"
 												id="name"
 												placeholder="First Name"
-												required=""
+												required
+												onChange={(e) =>
+													setFormData({
+														...formData,
+														first_name: e.target.value,
+													})
+												}
+												value={formData.first_name}
 											/>
 											<div className="help-block with-errors" />
 										</div>
@@ -87,7 +109,14 @@ const AppointmentForm = () => {
 												className="form-control"
 												id="name"
 												placeholder="Last Name"
-												required=""
+												required
+												onChange={(e) =>
+													setFormData({
+														...formData,
+														last_name: e.target.value,
+													})
+												}
+												value={formData.last_name}
 											/>
 											<div className="help-block with-errors" />
 										</div>
@@ -98,7 +127,14 @@ const AppointmentForm = () => {
 												className="form-control"
 												id="email"
 												placeholder="Enter Email"
-												required=""
+												required
+												onChange={(e) =>
+													setFormData({
+														...formData,
+														email: e.target.value,
+													})
+												}
+												value={formData.email}
 											/>
 											<div className="help-block with-errors" />
 										</div>
@@ -109,7 +145,14 @@ const AppointmentForm = () => {
 												className="form-control"
 												id="phone"
 												placeholder="Phone Number"
-												required=""
+												required
+												onChange={(e) =>
+													setFormData({
+														...formData,
+														phone: e.target.value,
+													})
+												}
+												value={formData.phone}
 											/>
 											<div className="help-block with-errors" />
 										</div>
@@ -120,9 +163,15 @@ const AppointmentForm = () => {
 												name="date"
 												className="form-control"
 												id="date"
-												required=""
+												required
+												onChange={(e) =>
+													setFormData({
+														...formData,
+														date: e.target.value,
+													})
+												}
+												value={formData.date}
 											/>
-											<div className="help-block with-errors" />
 										</div>
 										<div className="col-md-12 form-group">
 											<button type="submit" className="btn-default">

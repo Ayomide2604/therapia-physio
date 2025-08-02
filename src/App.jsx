@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import { useLocation } from "react-router-dom";
-
+import WhatsappButton from "./components/WhatsappButton";
 function App() {
 	const currentPath = useLocation().pathname;
 	const removeHeaderFooter = ["/not-found"];
@@ -25,6 +25,7 @@ function App() {
 				<Route path="/not-found" element={<NotFound />} />
 			</Routes>
 			{removeHeaderFooter.includes(currentPath) ? null : <Footer />}
+			<WhatsappButton />
 		</div>
 	);
 }

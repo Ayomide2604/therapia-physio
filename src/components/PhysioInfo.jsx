@@ -11,7 +11,7 @@ const PhysioInfo = () => {
 				</div>
 				<div className="doctor-info-content">
 					<h3>PT. Akinloye Gabriel Oluwafemi</h3>
-					<p>Physiotherapy</p>
+					<p>Physiotherapist</p>
 				</div>
 			</div>
 		</div>
