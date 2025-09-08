@@ -1,60 +1,92 @@
 import React, { useState, useEffect } from "react";
 
-// Sample images - replace these with your actual therapy/rehab images
-const galleryImages = [
+// Sample media - replace these with your actual therapy/rehab images and videos
+const galleryMedia = [
+	{
+		src: "/gallery/video1.mp4",
+		type: "video",
+		thumbnail: "/gallery/thumbnail.png",
+	},
+	{
+		src: "/gallery/video2.mp4",
+		type: "video",
+		thumbnail: "/gallery/thumbnail.png",
+	},
+	{
+		src: "/gallery/video3.mp4",
+		type: "video",
+		thumbnail: "/gallery/thumbnail.png",
+	},
+	{
+		src: "/gallery/video4.mp4",
+		type: "video",
+		thumbnail: "/gallery/thumbnail.png",
+	},
+
 	{
 		src: "/gallery/1.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/2.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/3.jpg",
+		type: "image",
 	},
+
 	{
 		src: "/gallery/4.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/5.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/6.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/7.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/8.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/9.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/10.jpg",
+		type: "image",
 	},
+
 	{
 		src: "/gallery/11.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/13.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/14.jpg",
+		type: "image",
 	},
 	{
 		src: "/gallery/15.jpg",
+		type: "image",
 	},
 ];
 
 const ITEMS_PER_PAGE = 6;
 
-const FullscreenViewer = ({
-	images,
-	currentIndex,
-	onClose,
-	onNext,
-	onPrev,
-}) => {
+const FullscreenViewer = ({ media, currentIndex, onClose, onNext, onPrev }) => {
+	const currentMedia = media[currentIndex];
 	useEffect(() => {
 		// Prevent scrolling when viewer is open
 		document.body.style.overflow = "hidden";
@@ -120,24 +152,29 @@ const FullscreenViewer = ({
 				</button>
 
 				{/* Main Image */}
-				<div
-					style={{
-						maxWidth: "90%",
-						maxHeight: "90%",
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					}}
-				>
-					<img
-						src={images[currentIndex].src}
-						alt={`Gallery ${currentIndex + 1}`}
-						style={{
-							maxHeight: "90vh",
-							maxWidth: "90vw",
-							objectFit: "contain",
-						}}
-					/>
+				<div style={{ maxWidth: "90%", maxHeight: "90%" }}>
+					{currentMedia.type === "video" ? (
+						<video
+							src={currentMedia.src}
+							controls
+							autoPlay
+							style={{
+								maxWidth: "100%",
+								maxHeight: "90vh",
+								borderRadius: "8px",
+							}}
+						/>
+					) : (
+						<img
+							src={currentMedia.src}
+							alt={`Gallery item ${currentIndex + 1}`}
+							style={{
+								maxWidth: "100%",
+								maxHeight: "90vh",
+								borderRadius: "8px",
+							}}
+						/>
+					)}
 				</div>
 
 				<button
@@ -205,7 +242,7 @@ const FullscreenViewer = ({
 						fontSize: "16px",
 					}}
 				>
-					{currentIndex + 1} / {images.length}
+					{currentIndex + 1} / {media.length}
 				</div>
 			</div>
 		</div>
@@ -215,17 +252,17 @@ const FullscreenViewer = ({
 const Gallery = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [viewerOpen, setViewerOpen] = useState(false);
-	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+	const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
-	const totalPages = Math.ceil(galleryImages.length / ITEMS_PER_PAGE);
+	const totalPages = Math.ceil(galleryMedia.length / ITEMS_PER_PAGE);
 	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-	const currentImages = galleryImages.slice(
+	const currentMedia = galleryMedia.slice(
 		startIndex,
 		startIndex + ITEMS_PER_PAGE
 	);
 
 	const openViewer = (index) => {
-		setCurrentImageIndex(startIndex + index);
+		setCurrentMediaIndex(startIndex + index);
 		setViewerOpen(true);
 	};
 
@@ -233,15 +270,15 @@ const Gallery = () => {
 		setViewerOpen(false);
 	};
 
-	const goToPrevImage = () => {
-		setCurrentImageIndex((prev) =>
-			prev === 0 ? galleryImages.length - 1 : prev - 1
+	const goToPrevMedia = () => {
+		setCurrentMediaIndex((prev) =>
+			prev === 0 ? galleryMedia.length - 1 : prev - 1
 		);
 	};
 
-	const goToNextImage = () => {
-		setCurrentImageIndex((prev) =>
-			prev === galleryImages.length - 1 ? 0 : prev + 1
+	const goToNextMedia = () => {
+		setCurrentMediaIndex((prev) =>
+			prev === galleryMedia.length - 1 ? 0 : prev + 1
 		);
 	};
 
@@ -255,10 +292,10 @@ const Gallery = () => {
 					closeViewer();
 					break;
 				case "ArrowLeft":
-					goToPrevImage();
+					goToPrevMedia();
 					break;
 				case "ArrowRight":
-					goToNextImage();
+					goToNextMedia();
 					break;
 				default:
 					break;
@@ -267,7 +304,7 @@ const Gallery = () => {
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [viewerOpen, currentImageIndex]);
+	}, [viewerOpen, currentMediaIndex]);
 
 	return (
 		<section className="gallery-section py-5 bg-light">
@@ -278,7 +315,7 @@ const Gallery = () => {
 				</div>
 
 				<div className="row g-4">
-					{currentImages.map((image, index) => (
+					{currentMedia.map((media, index) => (
 						<div key={index} className="col-md-4 col-sm-6">
 							<div
 								className="gallery-item position-relative overflow-hidden rounded"
@@ -286,6 +323,7 @@ const Gallery = () => {
 								style={{
 									cursor: "pointer",
 									transition: "transform 0.3s ease",
+									aspectRatio: "16/9",
 								}}
 								onMouseOver={(e) =>
 									(e.currentTarget.style.transform = "scale(1.02)")
@@ -294,16 +332,59 @@ const Gallery = () => {
 									(e.currentTarget.style.transform = "scale(1)")
 								}
 							>
-								<img
-									src={image.src}
-									alt={`Gallery ${startIndex + index + 1}`}
-									className="img-fluid w-100"
-									style={{
-										height: "250px",
-										objectFit: "cover",
-										borderRadius: "8px",
-									}}
-								/>
+								{media.type === "video" ? (
+									<div className="position-relative w-100 h-100">
+										<video
+											src={media.src}
+											className="w-100 h-100"
+											style={{
+												objectFit: "cover",
+												borderRadius: "8px",
+												aspectRatio: "16/9",
+											}}
+											muted
+											playsInline
+											onClick={(e) => {
+												e.stopPropagation();
+												openViewer(index);
+											}}
+											onMouseOver={(e) => {
+												e.target.play();
+												e.currentTarget.parentElement.style.transform = "scale(1.02)";
+											}}
+											onMouseOut={(e) => {
+												e.target.pause();
+												e.target.currentTime = 0;
+												e.currentTarget.parentElement.style.transform = "scale(1)";
+											}}
+										/>
+										<div 
+											className="position-absolute top-50 start-50 translate-middle"
+											onClick={(e) => {
+												e.stopPropagation();
+												openViewer(index);
+											}}
+										>
+											<div className="bg-white rounded-circle p-3">
+												<i
+													className="bi bi-play-fill text-primary"
+													style={{ fontSize: "2rem" }}
+												></i>
+											</div>
+										</div>
+									</div>
+								) : (
+									<img
+										src={media.src}
+										alt={`Gallery ${startIndex + index + 1}`}
+										className="img-fluid w-100 h-100"
+										style={{
+											objectFit: "cover",
+											borderRadius: "8px",
+											aspectRatio: "16/9",
+										}}
+									/>
+								)}
 							</div>
 						</div>
 					))}
@@ -367,11 +448,11 @@ const Gallery = () => {
 				{/* Fullscreen Viewer */}
 				{viewerOpen && (
 					<FullscreenViewer
-						images={galleryImages}
-						currentIndex={currentImageIndex}
+						media={galleryMedia}
+						currentIndex={currentMediaIndex}
 						onClose={closeViewer}
-						onNext={goToNextImage}
-						onPrev={goToPrevImage}
+						onNext={goToNextMedia}
+						onPrev={goToPrevMedia}
 					/>
 				)}
 			</div>
