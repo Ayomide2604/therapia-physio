@@ -4,23 +4,19 @@ import React, { useState, useEffect } from "react";
 const galleryMedia = [
 	{
 		src: "/gallery/video1.mp4",
-		type: "video",
-		thumbnail: "/gallery/thumbnail.png",
+		type: "video"
 	},
 	{
 		src: "/gallery/video2.mp4",
-		type: "video",
-		thumbnail: "/gallery/thumbnail.png",
+		type: "video"
 	},
 	{
 		src: "/gallery/video3.mp4",
-		type: "video",
-		thumbnail: "/gallery/thumbnail.png",
+		type: "video"
 	},
 	{
 		src: "/gallery/video4.mp4",
-		type: "video",
-		thumbnail: "/gallery/thumbnail.png",
+		type: "video"
 	},
 
 	{
@@ -342,6 +338,8 @@ const Gallery = () => {
 												borderRadius: "8px",
 												aspectRatio: "16/9",
 											}}
+											preload="metadata"
+											poster={media.src + '#t=0.1'}
 											muted
 											playsInline
 											onClick={(e) => {
