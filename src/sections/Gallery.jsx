@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 // Sample media - replace these with your actual therapy/rehab images and videos
 const galleryMedia = [
@@ -152,7 +152,103 @@ const galleryMedia = [
 	},
 ];
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_LOAD = 8;
+
+// Skeleton loader component
+const SkeletonLoader = () => (
+	<div className="gallery-item skeleton">
+		<div className="skeleton-shimmer"></div>
+	</div>
+);
+
+// Gallery item with lazy loading
+const GalleryItem = ({ media, index, onOpen }) => {
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [isHovering, setIsHovering] = useState(false);
+	const videoRef = useRef(null);
+	const itemRef = useRef(null);
+	const [isVisible, setIsVisible] = useState(false);
+
+	// Intersection Observer for lazy loading
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setIsVisible(true);
+					observer.disconnect();
+				}
+			},
+			{ rootMargin: "100px" }
+		);
+
+		if (itemRef.current) {
+			observer.observe(itemRef.current);
+		}
+
+		return () => observer.disconnect();
+	}, []);
+
+	// Handle video hover preview
+	const handleMouseEnter = () => {
+		setIsHovering(true);
+		if (videoRef.current && media.type === "video") {
+			videoRef.current.play().catch(() => {});
+		}
+	};
+
+	const handleMouseLeave = () => {
+		setIsHovering(false);
+		if (videoRef.current && media.type === "video") {
+			videoRef.current.pause();
+			videoRef.current.currentTime = 0;
+		}
+	};
+
+	if (!isVisible) {
+		return <div ref={itemRef} className="gallery-item skeleton">
+			<div className="skeleton-shimmer"></div>
+		</div>;
+	}
+
+	return (
+		<div
+			ref={itemRef}
+			className={`gallery-item ${isHovering ? "hovering" : ""}`}
+			onClick={() => onOpen(index)}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
+			{media.type === "video" ? (
+				<div className="gallery-video-wrapper">
+					<video
+						ref={videoRef}
+						src={media.src}
+						className="gallery-video"
+						preload="metadata"
+						muted
+						playsInline
+						loop
+					/>
+					<div className="video-play-overlay">
+						<div className="play-button">
+							<i className="bi bi-play-fill"></i>
+						</div>
+					</div>
+				</div>
+			) : (
+				<img
+					src={media.src}
+					alt={`Gallery ${index + 1}`}
+					className="gallery-image"
+					loading="lazy"
+					decoding="async"
+					onLoad={() => setIsLoaded(true)}
+					style={{ opacity: isLoaded ? 1 : 0 }}
+				/>
+			)}
+		</div>
+	);
+};
 
 const FullscreenViewer = ({ media, currentIndex, onClose, onNext, onPrev }) => {
 	const currentMedia = media[currentIndex];
@@ -165,152 +261,60 @@ const FullscreenViewer = ({ media, currentIndex, onClose, onNext, onPrev }) => {
 	}, []);
 
 	return (
-		<div
-			style={{
-				position: "fixed",
-				top: 0,
-				left: 0,
-				right: 0,
-				bottom: 0,
-				backgroundColor: "rgba(0, 0, 0, 0.95)",
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-				justifyContent: "center",
-				zIndex: 1000,
-			}}
-			onClick={onClose}
-		>
-			<div
-				style={{
-					position: "relative",
-					width: "100%",
-					height: "100%",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-				}}
-				onClick={(e) => e.stopPropagation()}
-			>
+		<div className="fullscreen-viewer" onClick={onClose}>
+			<div className="viewer-content" onClick={(e) => e.stopPropagation()}>
 				{/* Navigation Buttons */}
 				<button
+					className="viewer-nav-btn viewer-prev-btn"
 					onClick={(e) => {
 						e.stopPropagation();
 						onPrev();
 					}}
-					style={{
-						position: "absolute",
-						left: "20px",
-						top: "50%",
-						transform: "translateY(-50%)",
-						background: "rgba(0,0,0,0.5)",
-						color: "white",
-						border: "2px solid white",
-						borderRadius: "50%",
-						width: "50px",
-						height: "50px",
-						fontSize: "24px",
-						cursor: "pointer",
-						zIndex: 1002,
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					}}
+					aria-label="Previous"
 				>
 					❮
 				</button>
 
-				{/* Main Image */}
-				<div style={{ maxWidth: "90%", maxHeight: "90%" }}>
+				{/* Main Media */}
+				<div className="viewer-media">
 					{currentMedia.type === "video" ? (
 						<video
 							src={currentMedia.src}
 							controls
 							autoPlay
-							style={{
-								maxWidth: "100%",
-								maxHeight: "90vh",
-								borderRadius: "8px",
-							}}
+							className="viewer-video"
 						/>
 					) : (
 						<img
 							src={currentMedia.src}
 							alt={`Gallery item ${currentIndex + 1}`}
-							style={{
-								maxWidth: "100%",
-								maxHeight: "90vh",
-								borderRadius: "8px",
-							}}
+							className="viewer-image"
 						/>
 					)}
 				</div>
 
 				<button
+					className="viewer-nav-btn viewer-next-btn"
 					onClick={(e) => {
 						e.stopPropagation();
 						onNext();
 					}}
-					style={{
-						position: "absolute",
-						right: "20px",
-						top: "50%",
-						transform: "translateY(-50%)",
-						background: "rgba(0,0,0,0.5)",
-						color: "white",
-						border: "2px solid white",
-						borderRadius: "50%",
-						width: "50px",
-						height: "50px",
-						fontSize: "24px",
-						cursor: "pointer",
-						zIndex: 1002,
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					}}
+					aria-label="Next"
 				>
 					❯
 				</button>
 
 				{/* Close Button */}
 				<button
+					className="viewer-close-btn"
 					onClick={onClose}
-					style={{
-						position: "absolute",
-						top: "20px",
-						right: "20px",
-						background: "rgba(0,0,0,0.5)",
-						color: "white",
-						border: "2px solid white",
-						borderRadius: "50%",
-						width: "50px",
-						height: "50px",
-						fontSize: "24px",
-						cursor: "pointer",
-						zIndex: 1002,
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					}}
+					aria-label="Close"
 				>
 					✕
 				</button>
 
-				{/* Image Counter */}
-				<div
-					style={{
-						position: "absolute",
-						bottom: "20px",
-						left: "50%",
-						transform: "translateX(-50%)",
-						color: "white",
-						background: "rgba(0,0,0,0.5)",
-						padding: "8px 16px",
-						borderRadius: "20px",
-						fontSize: "16px",
-					}}
-				>
+				{/* Media Counter */}
+				<div className="viewer-counter">
 					{currentIndex + 1} / {media.length}
 				</div>
 			</div>
@@ -319,21 +323,18 @@ const FullscreenViewer = ({ media, currentIndex, onClose, onNext, onPrev }) => {
 };
 
 const Gallery = () => {
-	const [currentPage, setCurrentPage] = useState(1);
+	const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
 	const [viewerOpen, setViewerOpen] = useState(false);
 	const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+	const [showBackToTop, setShowBackToTop] = useState(false);
 
-	const totalPages = Math.ceil(galleryMedia.length / ITEMS_PER_PAGE);
-	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-	const currentMedia = galleryMedia.slice(
-		startIndex,
-		startIndex + ITEMS_PER_PAGE
-	);
+	const visibleMedia = galleryMedia.slice(0, visibleCount);
+	const hasMore = visibleCount < galleryMedia.length;
 
-	const openViewer = (index) => {
-		setCurrentMediaIndex(startIndex + index);
+	const openViewer = useCallback((index) => {
+		setCurrentMediaIndex(index);
 		setViewerOpen(true);
-	};
+	}, []);
 
 	const closeViewer = () => {
 		setViewerOpen(false);
@@ -349,6 +350,14 @@ const Gallery = () => {
 		setCurrentMediaIndex((prev) =>
 			prev === galleryMedia.length - 1 ? 0 : prev + 1
 		);
+	};
+
+	const loadMore = () => {
+		setVisibleCount((prev) => Math.min(prev + ITEMS_PER_LOAD, galleryMedia.length));
+	};
+
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	};
 
 	// Handle keyboard navigation
@@ -373,147 +382,66 @@ const Gallery = () => {
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [viewerOpen, currentMediaIndex]);
+	}, [viewerOpen]);
+
+	// Handle back to top button visibility
+	useEffect(() => {
+		const handleScroll = () => {
+			setShowBackToTop(window.scrollY > 500);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	return (
-		<section className="gallery-section py-5 bg-light">
+		<section className="gallery-section">
 			<div className="container">
 				<div className="section-title text-center mb-5">
 					<h2>Our Gallery</h2>
 					<p>Explore moments from our therapy sessions and facility</p>
 				</div>
 
-				<div className="row g-4">
-					{currentMedia.map((media, index) => (
-						<div key={index} className="col-md-4 col-sm-6">
-							<div
-								className="gallery-item position-relative overflow-hidden rounded"
-								onClick={() => openViewer(index)}
-								style={{
-									cursor: "pointer",
-									transition: "transform 0.3s ease",
-									aspectRatio: "16/9",
-								}}
-								onMouseOver={(e) =>
-									(e.currentTarget.style.transform = "scale(1.02)")
-								}
-								onMouseOut={(e) =>
-									(e.currentTarget.style.transform = "scale(1)")
-								}
-							>
-								{media.type === "video" ? (
-									<div className="position-relative w-100 h-100">
-										<video
-											src={media.src}
-											className="w-100 h-100"
-											style={{
-												objectFit: "cover",
-												borderRadius: "8px",
-												aspectRatio: "16/9",
-											}}
-											preload="metadata"
-											poster={media.src + '#t=0.1'}
-											muted
-											playsInline
-											onClick={(e) => {
-												e.stopPropagation();
-												openViewer(index);
-											}}
-											onMouseOver={(e) => {
-												e.target.play();
-												e.currentTarget.parentElement.style.transform = "scale(1.02)";
-											}}
-											onMouseOut={(e) => {
-												e.target.pause();
-												e.target.currentTime = 0;
-												e.currentTarget.parentElement.style.transform = "scale(1)";
-											}}
-										/>
-										<div 
-											className="position-absolute top-50 start-50 translate-middle"
-											onClick={(e) => {
-												e.stopPropagation();
-												openViewer(index);
-											}}
-										>
-											<div className="bg-white rounded-circle p-3">
-												<i
-													className="bi bi-play-fill text-primary"
-													style={{ fontSize: "2rem" }}
-												></i>
-											</div>
-										</div>
-									</div>
-								) : (
-									<img
-										src={media.src}
-										alt={`Gallery ${startIndex + index + 1}`}
-										className="img-fluid w-100 h-100"
-										style={{
-											objectFit: "cover",
-											borderRadius: "8px",
-											aspectRatio: "16/9",
-										}}
-									/>
-								)}
-							</div>
-						</div>
+				{/* Masonry Gallery Grid */}
+				<div className="gallery-masonry">
+					{visibleMedia.map((media, index) => (
+						<GalleryItem
+							key={index}
+							media={media}
+							index={index}
+							onOpen={openViewer}
+						/>
 					))}
 				</div>
 
-				{/* Pagination */}
-				{totalPages > 1 && (
-					<div className="pagination-container d-flex justify-content-center mt-5">
-						<nav aria-label="Gallery pagination">
-							<ul className="pagination">
-								<li
-									className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
-								>
-									<button
-										className="page-link"
-										onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-										disabled={currentPage === 1}
-									>
-										Previous
-									</button>
-								</li>
-
-								{Array.from({ length: totalPages }, (_, i) => i + 1).map(
-									(page) => (
-										<li
-											key={page}
-											className={`page-item ${
-												page === currentPage ? "active" : ""
-											}`}
-										>
-											<button
-												className="page-link"
-												onClick={() => setCurrentPage(page)}
-											>
-												{page}
-											</button>
-										</li>
-									)
-								)}
-
-								<li
-									className={`page-item ${
-										currentPage === totalPages ? "disabled" : ""
-									}`}
-								>
-									<button
-										className="page-link"
-										onClick={() =>
-											setCurrentPage((p) => Math.min(totalPages, p + 1))
-										}
-										disabled={currentPage === totalPages}
-									>
-										Next
-									</button>
-								</li>
-							</ul>
-						</nav>
+				{/* Load More Button */}
+				{hasMore && (
+					<div className="load-more-container">
+						<button
+							className="load-more-btn"
+							onClick={loadMore}
+						>
+							Load More ({galleryMedia.length - visibleCount} remaining)
+						</button>
 					</div>
+				)}
+
+				{/* No more items indicator */}
+				{!hasMore && (
+					<div className="gallery-end">
+						<p>You've reached the end of the gallery</p>
+					</div>
+				)}
+
+				{/* Back to Top Button */}
+				{showBackToTop && (
+					<button
+						className="back-to-top-btn"
+						onClick={scrollToTop}
+						aria-label="Back to top"
+					>
+						<i className="bi bi-arrow-up"></i>
+					</button>
 				)}
 
 				{/* Fullscreen Viewer */}
