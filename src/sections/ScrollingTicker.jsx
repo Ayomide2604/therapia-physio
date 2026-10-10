@@ -12,7 +12,7 @@ const ScrollingTicker = () => {
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
-						For any additional inqueries : therapiarehab@gmail.com
+						For any additional inqueries : physiotherapy@therapiarehab.ng
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
@@ -30,7 +30,7 @@ const ScrollingTicker = () => {
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />
-						For any additional inqueries : therapiarehab@gmail.com
+						For any additional inqueries : physiotherapy@therapiarehab.ng
 					</span>
 					<span>
 						<img src="images/icon-sparkles.svg" alt="" />

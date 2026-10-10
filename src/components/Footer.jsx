@@ -125,10 +125,10 @@ const Footer = () => {
 									</div>
 									<div className="footer-info-box-content">
 										<a
-											href="mailto:therapiarehabng@gmail.com"
+											href="mailto:physiotherapy@therapiarehab.ng"
 											className="text-white"
 										>
-											therapiarehabng@gmail.com
+											physiotherapy@therapiarehab.ng
 										</a>
 									</div>
 								</div>
