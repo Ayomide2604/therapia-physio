@@ -3,6 +3,82 @@ import React, { useState, useEffect } from "react";
 // Sample media - replace these with your actual therapy/rehab images and videos
 const galleryMedia = [
 	{
+		src: "/gallery/video_5.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_6.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_7.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_8.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_9.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_10.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_11.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_12.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_13.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_14.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_15.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_16.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_17.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_18.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_19.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_20.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_21.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_22.MP4",
+		type: "video"
+	},
+	{
+		src: "/gallery/video_23.MP4",
+		type: "video"
+	},
+	{
 		src: "/gallery/video1.mp4",
 		type: "video"
 	},
@@ -18,7 +94,6 @@ const galleryMedia = [
 		src: "/gallery/video4.mp4",
 		type: "video"
 	},
-
 	{
 		src: "/gallery/1.jpg",
 		type: "image",
@@ -31,7 +106,6 @@ const galleryMedia = [
 		src: "/gallery/3.jpg",
 		type: "image",
 	},
-
 	{
 		src: "/gallery/4.jpg",
 		type: "image",
@@ -60,7 +134,6 @@ const galleryMedia = [
 		src: "/gallery/10.jpg",
 		type: "image",
 	},
-
 	{
 		src: "/gallery/11.jpg",
 		type: "image",
